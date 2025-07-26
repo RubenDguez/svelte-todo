@@ -2,7 +2,7 @@
   import Todo from "../Todo.svelte";
   const _todo = Todo.instance();
 
-  let filter = $state<TFilter>("All");
+  let filter = $state<TFilter>(_todo.filter);
 
   const handleChange = () => {
     _todo.filter = filter;

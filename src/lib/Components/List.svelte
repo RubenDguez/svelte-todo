@@ -8,19 +8,21 @@
   };
 </script>
 
-<fieldset>
-  {#each _todo.filtered() as todo (todo.id)}
-    <label class:scratch={todo.done}>
-      <input
-        type="checkbox"
-        name={todo.title}
-        checked={todo.done}
-        onclick={() => handleDone(todo.id)}
-      />
-      {todo.title}
-    </label>
-  {/each}
-</fieldset>
+<article>
+  <fieldset>
+    {#each _todo.filtered() as todo (todo.id)}
+      <label class:scratch={todo.done}>
+        <input
+          type="checkbox"
+          name={todo.title}
+          checked={todo.done}
+          onclick={() => handleDone(todo.id)}
+        />
+        {todo.title}
+      </label>
+    {/each}
+  </fieldset>
+</article>
 
 <style>
   .scratch {
