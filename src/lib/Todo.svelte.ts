@@ -57,6 +57,11 @@ export default class Todo {
     this.toLocalStorage();
   }
 
+  remove(id: string): void {
+    this._todos = [...this._todos.filter((f) => (f.id !== id))];
+    this.toLocalStorage();
+  }
+
   toLocalStorage(): void {
     window.localStorage.setItem(this.TODO_LOCAL_STORAGE_ITEM, JSON.stringify(this._todos));
   }
