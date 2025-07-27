@@ -8,7 +8,7 @@ export default class Todo {
 
   private constructor() {
     const todos: Array<ITodo> = JSON.parse(window.localStorage.getItem(this.TODO_LOCAL_STORAGE_ITEM) ?? '[]');
-    
+
     todos.forEach((todo) => {
       this._todos.push(todo);
     });

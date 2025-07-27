@@ -10,10 +10,10 @@
 </script>
 
 <form>
-    <p>Filters</p>
-    <select name="filter" bind:value={filter} onchange={handleChange} required>
-      <option>All</option>
-      <option>Completed</option>
-      <option>Pending</option>
-    </select>
+  <p>Filters</p>
+  <select name="filter" bind:value={filter} onchange={handleChange} required>
+    <option>All</option>
+    <option>Completed</option>
+    <option>Pending</option>
+  </select>
 </form>
