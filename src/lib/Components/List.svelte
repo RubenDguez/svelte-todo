@@ -3,8 +3,7 @@
   const _todo = Todo.instance();
 
   const handleDone = (id: string) => {
-    const todo = _todo.getById(id);
-    _todo.toggleDone(todo.id);
+    _todo.toggleDone(id);
   };
 </script>
 

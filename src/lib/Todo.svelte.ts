@@ -3,20 +3,10 @@ export default class Todo {
   private readonly TODO_LOCAL_STORATE_FILTER = 'filter';
 
   private static _instance: Todo;
-  private _todos = $state<Array<ITodo>>([]);
+  private _todos = $state<Array<ITodo>>(JSON.parse(window.localStorage.getItem(this.TODO_LOCAL_STORAGE_ITEM) ?? '[]'));
   private _filterBy = $state<TFilter>(<TFilter>window.localStorage.getItem(this.TODO_LOCAL_STORATE_FILTER) ?? 'All');
 
-  private constructor() {
-    const todos: Array<ITodo> = JSON.parse(window.localStorage.getItem(this.TODO_LOCAL_STORAGE_ITEM) ?? '[]');
-
-    todos.forEach((todo) => {
-      this._todos.push(todo);
-    });
-  }
-
-  toLocalStorage(): void {
-    window.localStorage.setItem(this.TODO_LOCAL_STORAGE_ITEM, JSON.stringify(this._todos));
-  }
+  private constructor() { }
 
   static instance(): Todo {
     if (Todo._instance === undefined)
@@ -65,5 +55,9 @@ export default class Todo {
     const todo = this._todos.find((f) => (f.id === id))!;
     todo.done = !todo.done;
     this.toLocalStorage();
+  }
+
+  toLocalStorage(): void {
+    window.localStorage.setItem(this.TODO_LOCAL_STORAGE_ITEM, JSON.stringify(this._todos));
   }
 }
