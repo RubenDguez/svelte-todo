@@ -1,31 +1,33 @@
 <script lang="ts">
   import Todo from "../Todo.svelte";
-
   const _todo = Todo.instance();
 
-  let title = $state<string>("");
+  let titleInputEl: HTMLInputElement;
+
   let error = $state<string>("");
 
   const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
-    error = "";
+    const title = titleInputEl.value.trim();
 
-    if (title.trim() === "") {
+    if (title === "") {
+      titleInputEl.value = title;
+      titleInputEl.focus();
       error = "Title cannot be empty";
       return;
     }
 
-    const todo: ITodo = {
+    _todo.add({
       id: crypto.randomUUID(),
       title: title.trim(),
       done: false,
-    };
+    });
 
-    _todo.add(todo);
-
-    title = "";
+    error = "";
+    titleInputEl.value = "";
+    titleInputEl.focus();
 
     return;
   };
@@ -34,7 +36,11 @@
 <form onsubmit={handleSubmit}>
   <!-- svelte-ignore a11y_no_redundant_roles -->
   <fieldset role="group">
-    <input type="text" placeholder="Enter todo title..." bind:value={title} />
+    <input
+      type="text"
+      placeholder="Enter todo title..."
+      bind:this={titleInputEl}
+    />
     <input type="submit" value="Add" />
   </fieldset>
   {#if error !== ""}
