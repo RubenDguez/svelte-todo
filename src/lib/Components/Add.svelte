@@ -37,4 +37,14 @@
     <input type="text" placeholder="Enter todo title..." bind:value={title} />
     <input type="submit" value="Add" />
   </fieldset>
+  {#if error !== ""}
+    <small class="error">{error}</small>
+  {/if}
 </form>
+
+<style>
+  .error {
+    color: tomato;
+    font-size: 0.65rem;
+  }
+</style>
